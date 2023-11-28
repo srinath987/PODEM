@@ -1,10 +1,10 @@
-# ifndef FUNCTIONS_H
-# define FUNCTIONS_H
+# ifndef __FUNCTIONS_H
+# define __FUNCTIONS_H
 
 # include "main.h"
 
-void addEdge(vector<vector<pair<ll, ll>>> &adj, ll u, ll v, ll wire);
+void addEdge(vector<vector<pair<int, int>>> &adj, int u, int v, int wire);
 
-void printcircuit(vector<vector<pair<ll, ll>>> &adj, ll numnodes);
+void printcircuit(vector<vector<pair<int, int>>> &adj, int numnodes);
 
 # endif

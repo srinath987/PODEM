@@ -1,10 +1,10 @@
 # include "algorithm.h"
 
-// vector<int> getwire_surr(vector<vector<ll>> &adj, vector<vector<ll>> &revadj, ll numnodes, ll wire, vector<int> &ntype)
+// vector<int> getwire_surr(vector<vector<int>> &adj, vector<vector<int>> &revadj, int numnodes, int wire, vector<int> &ntype)
 // {
 //     vector<int> surr (6);
-//     ll v, w;
-//     for(ll i = 0; i < numnodes; i++)
+//     int v, w;
+//     for(int i = 0; i < numnodes; i++)
 //     {
 //         for(auto it2: adj[i])
 //         {
@@ -50,10 +50,10 @@
 //     return surr;
 // }
 
-// vector<int> getbranch_sur(vector<vector<ll>> &adj, ll numnodes, ll wire, ll node)
+// vector<int> getbranch_sur(vector<vector<int>> &adj, int numnodes, int wire, int node)
 // {
 //     vecor<int> bsurr;
-//     ll v, w;;
+//     int v, w;;
 //     for(auto it : adj[node - 1])
 //     {
 //         v = it.first;
@@ -63,9 +63,9 @@
 //     return bsurr;
 // }
 
-void PODEM(vector<vector<pair<ll, ll>>> &adj, vector<vector<pair<ll, ll>>> &revadj, ll numnodes, vector<int> ntype, vector<int> &fpi, ll wire, char state)
+void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char state)
 {
-    ll u = 0, v, w, npi = fpi.size();
+    int u = 0, v, w, npi = fpi.size();
     for(int i = 0; i < numnodes; i++)
     {
         for(auto it : adj[i])
@@ -85,13 +85,13 @@ void PODEM(vector<vector<pair<ll, ll>>> &adj, vector<vector<pair<ll, ll>>> &reva
         return;
     }
     // objective is to Initialise the fault by assigning primary inputs
-    vector<vector<ll>> choices;
+    vector<vector<int>> choices;
     choices = Objective(adj, revadj, numnodes, npi, ntype, u, v, w, state);
 }
 
-vector<vector<ll>> Objective(vector<vector<pair<ll, ll>>> &adj, vector<vector<pair<ll, ll>>> &revadj, ll numnodes, ll npi, vector<int> ntype, ll u, ll v, ll wire, char state)
+vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
 {
-    vector<vector<ll>> ans;
-    vector<ll> pi (npi, -1);
+    vector<vector<int>> ans;
+    vector<int> pi (npi, -1);
 }
 

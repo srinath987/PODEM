@@ -1,13 +1,13 @@
 # include "functions.h"
 
-void addEdge(vector<vector<pair<ll, ll>>> &adj, ll u, ll v, ll wire)
+void addEdge(vector<vector<pair<int, int>>> &adj, int u, int v, int wire)
 {
     adj[u - 1].push_back(make_pair(v, wire));
 }
 
-void printcircuit(vector<vector<pair<ll, ll>>> &adj, ll numnodes)
+void printcircuit(vector<vector<pair<int, int>>> &adj, int numnodes)
 {
-    for(ll i = 0; i < numnodes; i++)
+    for(int i = 0; i < numnodes; i++)
     {
         cout << i + 1 << ": ";
         for(auto it : adj[i])

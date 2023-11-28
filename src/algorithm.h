@@ -3,11 +3,11 @@
 
 # include "main.h"
 
-// vector<int> getwire_surr(vector<vector<ll>> &adj, vector<vector<ll>> &revadj, ll numnodes, ll wire, vector<int> &ntype);
+// vector<int> getwire_surr(vector<vector<int>> &adj, vector<vector<int>> &revadj, int numnodes, int wire, vector<int> &ntype);
 
-// vector<int> getbranch_sur(vector<vector<ll>> &adj, ll numnodes, ll wire, ll node);
+// vector<int> getbranch_sur(vector<vector<int>> &adj, int numnodes, int wire, int node);
 
-void PODEM(vector<vector<pair<ll, ll>>> &adj, vector<vector<pair<ll, ll>>> &revadj, ll numnodes, vector<int> ntype, vector<int> &fpi, ll wire, char state);
+void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char state);
 
-vector<vector<ll>> Objective(vector<vector<pair<ll, ll>>> &adj, vector<vector<pair<ll, ll>>> &revadj, ll numnodes, ll npi, vector<int> ntype, ll u, ll v, ll wire, char state);
+vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state);
 # endif
