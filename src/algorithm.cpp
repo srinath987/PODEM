@@ -63,41 +63,43 @@
 //     return bsurr;
 // }
 
-bool PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
-{
-    // if D or D' at output return true
+// bool PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
+// {
+//     // if D or D' at output return true
     
 
-    // if test impossible return false
-}
+//     // if test impossible return false
+// }
 
-vector<int> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
-{
-    // returns the objective (n, v) n -> node v -> value
-    if(n == 'x')
-    {
-        return ;
-    }
+// vector<int> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
+// {
+//     // returns the objective (n, v) n -> node v -> value
+//     if(n == 'x')
+//     {
+//         return ;
+//     }
 
-}
+// }
 
-pair<pi, int> backtrace(vvp &revadj, vi &ntype, vi &state, int u, int &obj)
+pair<pi, int> backtrace(int u, int &obj)
 {
     int n = ntype.size();
     vi visited (n);
     pair<pi, int> ass = {{0, 0}, -1};
+    bool backtraced = false;
     visited[u - 1] = 1;
     if(ntype[u - 1] == 3 || ntype[u - 1] == 4 || ntype[u - 1] == 6 || ntype[u - 1] == 7)
     {
         obj = 1 - obj;
     }
-    dfs(revadj, visited, ntype, state, u, obj, ass);
+    dfs(revadj, visited, ntype, state, u, obj, ass, backtraced);
     return ass;
 }
 
-void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pair<pi, int> &ass)
+void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pair<pi, int> &ass, bool &backtraced)
 {
     visited[node - 1] = 1;
+    cout << "\n" << node << "\n";
     int v, w;
     for(auto it : revadj[node - 1])
     {
@@ -108,6 +110,12 @@ void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pai
             if(ntype[v - 1] == 3 || ntype[v - 1] == 4 || ntype[v - 1] == 6 || ntype[v - 1] == 7)
             {
                 obj = 1 - obj;
+                dfs(revadj, visited, ntype, state, v, obj, ass, backtraced);
+                if(backtraced == true)
+                {
+                    return;
+                }
+                obj = 1 - obj;
             }
             if(ntype[v - 1] == -1)
             {
@@ -116,10 +124,10 @@ void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pai
                     ass.first.first = v;
                     ass.first.second = w;
                     ass.second  = obj;
+                    backtraced = true;
                     return;
                 }
             }
-            dfs(revadj, visited, ntype, state, v, obj, ass);
         }
     }
 }
