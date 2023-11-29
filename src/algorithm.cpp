@@ -126,3 +126,221 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
         }
     }
 }
+
+void fimply(int pinp, int val)
+{
+    for(auto it : adj[pinp - 1])
+    {
+        state[it.second] = val;
+    }
+    int v, w;
+    int logic, unknown, df, ef;
+    for(auto it1 : adj[pinp - 1])
+    {
+        v = it1.first;
+        w = it1.second;
+        logic = -1;
+        unknown = 0;
+        df = 0;
+        ef = 0;
+        if(ntype[v] == 0)
+        {
+            fimply(v, val);
+            continue;  
+        }
+        else if(ntype[v] == 7)
+        {
+            if(val == 0 || val == 1)
+            {
+                fimply(v, 1 - val);
+            }
+            else if(val == 2)
+            {
+                fimply(v, 3);
+            }
+            else if(val == 3)
+            {
+                fimply(v, 2);
+            }
+            continue;
+        }
+        for(auto it2 : revadj[v - 1])
+        {
+            if(state[it2.second] == -1)
+            {
+                unknown = 1;
+            }
+            else if(state[it2.second] == 2)
+            {
+                df = 1;
+            }
+            else if(state[it2.second] == 3)
+            {
+                ef = 1;
+            }
+            else
+            {
+                if(logic == -1)
+                {
+                    logic = state[it2.second];
+                }
+                else
+                {
+                    if(ntype[v] == 1 || ntype[v] == 3)
+                    {
+                        logic = logic & state[it2.second];
+                    }
+                    else if(ntype[v] == 2 || ntype[v] == 4)
+                    {
+                        logic = logic | state[it2.second];
+                    }
+                    else if(ntype[v] == 5 || ntype[v] == 6)
+                    {
+                        logic = logic ^ state[it2.second];
+                    }
+                }
+            }
+        }
+        if(ntype[v] == 1 || ntype[v] == 3)
+        {
+            if(logic == 0)
+            {
+                if(ntype[v] == 3)
+                {
+                    fimply(v, 1);
+                }
+                else
+                {
+                    fimply(v, 0);
+                }
+            }
+            else if(df == 1 && ef == 1)
+            {
+                if(ntype[v] == 3)
+                {
+                    fimply(v, 1);
+                }
+                else
+                {
+                    fimply(v, 0);
+                }
+            }
+            else if(df == 1 && ef == 0)
+            {
+                if(ntype[v] == 3)
+                {
+                    fimply(v, 3);
+                }
+                else
+                {
+                    fimply(v, 2);
+                }
+            }
+            else if(df == 0 && ef == 1)
+            {
+                if(ntype[v] == 3)
+                {
+                    fimply(v, 2);
+                }
+                else
+                {
+                    fimply(v, 3);
+                }
+            }
+        }
+        else if(ntype[v] == 2 || ntype[v] == 4)
+        {
+            if(logic == 1)
+            {
+                if(ntype[v] == 4)
+                {
+                    fimply(v, 0);
+                }
+                else
+                {
+                    fimply(v, 1);
+                }
+            }
+            else if(df == 1 && ef == 1)
+            {
+                if(ntype[v] == 4)
+                {
+                    fimply(v, 0);
+                }
+                else
+                {
+                    fimply(v, 1);
+                }
+            }
+            else if(df == 1 && ef == 0)
+            {
+                if(ntype[v] == 4)
+                {
+                    fimply(v, 3);
+                }
+                else
+                {
+                    fimply(v, 2);
+                }
+            }
+            else if(df == 0 && ef == 1)
+            {
+                if(ntype[v] == 4)
+                {
+                    fimply(v, 2);
+                }
+                else
+                {
+                    fimply(v, 3);
+                }
+            }
+        }
+        else if(ntype[v] == 5 || ntype[v] == 6)
+        {
+            if(logic == 1)
+            {
+                if(ntype[v] == 6)
+                {
+                    fimply(v, 0);
+                }
+                else
+                {
+                    fimply(v, 1);
+                }
+            }
+            else if(df == 1 && ef == 1)
+            {
+                if(ntype[v] == 6)
+                {
+                    fimply(v, 0);
+                }
+                else
+                {
+                    fimply(v, 1);
+                }
+            }
+            else if(df == 1 && ef == 0)
+            {
+                if(ntype[v] == 6)
+                {
+                    fimply(v, 3);
+                }
+                else
+                {
+                    fimply(v, 2);
+                }
+            }
+            else if(df == 0 && ef == 1)
+            {
+                if(ntype[v] == 6)
+                {
+                    fimply(v, 2);
+                }
+                else
+                {
+                    fimply(v, 3);
+                }
+            }
+        }
+    }
+}
