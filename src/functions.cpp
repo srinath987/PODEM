@@ -1,3 +1,4 @@
+# include "mainheader.cpp"
 # include "functions.h"
 
 void addEdge(vector<vector<pair<int, int>>> &adj, int u, int v, int wire)

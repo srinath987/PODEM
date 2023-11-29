@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+# ifndef MAINHEADER_H
+# define MAINHEADER_H
+
+# include <bits/stdc++.h>
 
 using namespace std;
 
@@ -8,9 +11,12 @@ using namespace std;
 #define pi pair<int, int>
 #define mii map<int,int>
 
-# include "functions.h"
-# include "algorithm.h"
+vvp adj;
+vvp revadj;
+mii state; 
+mii ntype;
+vi inputs;
+vi outputs;
+int numnodes, numedges;
 
-extern vvp adj, revadj;
-extern mii state, ntype;
-extern vi inputs, outputs;
+# endif

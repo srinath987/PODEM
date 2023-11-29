@@ -1,18 +1,21 @@
-# include "main.h"
+# include "mainheader.cpp"
+# include "algorithm.cpp"
+# include "functions.cpp"
 
 int main()
 {
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-    int numnodes, npi;
+    int npi;
     cout << "Enter the number of nodes (Branching points, gates, inputs, outputs): \n";
     cin >> numnodes;
-    int numedges;
     cout << "Enter the number of edges (Wires): \n";
     cin >> numedges;
-    vvp adj(numnodes, vp (0));
-    vvp revadj(numnodes, vp (0));
-    vector<int> ntype(numnodes);
+    for(int i = 0; i < numnodes; i++)
+    {
+        adj.push_back(vp (0));
+        revadj.push_back(vp (0));
+    }
     cout << "Enter connections in netlist format (node1 node2 wireid): \n";
     for(int i = 0; i < numedges; i++)
     {
@@ -20,13 +23,14 @@ int main()
         cin >> u >> v >> wire;
         addEdge(adj, u, v, wire);
         addEdge(revadj, v, u, wire);
+        state[wire] = -1;
     }
     cout << "Enter the type of node: \n -2: output\n -1: input\n 0: branching point\n 1: AND\n 2: OR\n 3: NAND\n 4: NOR\n 5: XOR\n 6: XNOR\n 7: NOT\n";
     for(int i = 0; i < numnodes; i++)
     {
         int type;
         cin >> type;
-        ntype[i] = type;
+        ntype[i + 1] = type;
         if(type == -1)
         {
             npi++;
@@ -68,5 +72,38 @@ int main()
         }
     }
 
+
+// PODEM for all faults possible
+    // for(int i = 0; i < numedges; i++)
+    // {
+    //     fwire = i;
+    //     for(int j = 0; j < 2; j++)
+    //     {
+    //         f_state = f_states[j];
+    //         for(int k = 0; k < npi; k++)
+    //         {
+    //             fpi[k] = 0;
+    //         }
+    //         if(PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state))
+    //         {
+    //             cout << "Fault " << fwire + 1 << " can be detected by test vector: ";
+    //             for(int k = 0; k < npi; k++)
+    //             {
+    //                 cout << fpi[k] << " ";
+    //             }
+    //             cout << endl;
+    //         }
+    //         else
+    //         {
+    //             cout << "Fault " << fwire + 1 << " cannot be detected by any test vector\n";
+    //         }
+    //     }
+    // }
+
+// Debugging backtrace
+    int u = 10;
+    int obj = 0;
+    pair<pi, int> assign = backtrace(u, obj);
+    cout << "PI: " << assign.first.first << "PI wire: " << assign.first.second << "Value: " << assign.second;
     return 0;
 }

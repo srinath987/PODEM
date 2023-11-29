@@ -1,61 +1,64 @@
+# include "mainheader.cpp"
 # include "algorithm.h"
 
-void forwardimpl(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, vector<int> &ntype, vector<int> &state, int node, int wire, char val)
-{
-}
 
-bool PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
-{
-    // if D or D' at output return true
-    for(int i = 0; i < outputs.size(); i++) {
-        if(state[outputs[i]] == 2 || state[outputs[i]] == 3) {
-            return true;
-        }
-    }
 
-    vector<int> nv = Objective(adj, revadj, numnodes, npi, ntype, wire, fault);
-    int n = nv[0];
-    int v = nv[1]; 
+// void forwardimpl(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, vector<int> &ntype, vector<int> &state, int node, int wire, char val)
+// {
+// }
+
+// bool PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
+// {
+//     // if D or D' at output return true
+//     for(int i = 0; i < outputs.size(); i++) {
+//         if(state[outputs[i]] == 2 || state[outputs[i]] == 3) {
+//             return true;
+//         }
+//     }
+
+//     vector<int> nv = Objective(adj, revadj, numnodes, npi, ntype, wire, fault);
+//     int n = nv[0];
+//     int v = nv[1]; 
     
-    vector<int> pv = backtrace(revadj, ntype, state, n, v);
-    int p = pv[0];
-    int w = pv[1];
+//     vector<int> pv = backtrace(revadj, ntype, state, n, v);
+//     int p = pv[0];
+//     int w = pv[1];
 
-    forwardimpl(adj, revadj, ntype, p, w);
+//     forwardimpl(adj, revadj, ntype, p, w);
 
-    if(PODEM(adj, revadj, numnodes, ntype, fpi, wire, fault))
-    {
-        return true;
-    }
+//     if(PODEM(adj, revadj, numnodes, ntype, fpi, wire, fault))
+//     {
+//         return true;
+//     }
 
-    if(w == 0)
-    w = 1;
-    else
-    w = 0;
+//     if(w == 0)
+//     w = 1;
+//     else
+//     w = 0;
 
-    forwardimpl(adj, revadj, ntype, p, w);
+//     forwardimpl(adj, revadj, ntype, p, w);
 
-    if(PODEM(adj, revadj, numnodes, ntype, fpi, wire, fault))
-    {
-        return true;
-    }
+//     if(PODEM(adj, revadj, numnodes, ntype, fpi, wire, fault))
+//     {
+//         return true;
+//     }
 
-    forwardimpl(adj, revadj, ntype, p, -1);
+//     forwardimpl(adj, revadj, ntype, p, -1);
 
-    return false;
-}
+//     return false;
+// }
 
-vector<int> Objective(int wire, int fault)
-{
-    // returns the objective (n, v) n -> node v -> value
-    if(state[wire] == -1) {
-        if(fault == 0) {
-            return {wire, 1};
-        }
-        else {
-            return {wire, 0};
-        }
-    }
+// vector<int> Objective(int wire, int fault)
+// {
+//     // returns the objective (n, v) n -> node v -> value
+//     if(state[wire] == -1) {
+//         if(fault == 0) {
+//             return {wire, 1};
+//         }
+//         else {
+//             return {wire, 0};
+//         }
+//     }
 
     // propagate the fault to the output
     for(auto it : state) {
@@ -76,26 +79,27 @@ vector<int> Objective(int wire, int fault)
         }
     }
 
-    return {-1, -1};
-}
+//     return {-1, -1};
+// }
 
-pair<pi, int> backtrace(vvp &revadj, vi &ntype, vi &state, int u, int &obj)
+pair<pi, int> backtrace(int u, int &obj)
 {
-    int n = ntype.size();
-    vi visited (n);
+    vi visited (numnodes, 0);
     pair<pi, int> assign = {{0, 0}, -1};
+    bool backtraced = false;
     visited[u - 1] = 1;
-    if(ntype[u - 1] == 3 || ntype[u - 1] == 4 || ntype[u - 1] == 6 || ntype[u - 1] == 7)
+    if(ntype[u] == 3 || ntype[u] == 4 || ntype[u] == 6 || ntype[u] == 7)
     {
         obj = 1 - obj;
     }
-    dfs(revadj, visited, ntype, state, u, obj, assign);
+    dfs(visited, u, obj, assign, backtraced);
     return assign;
 }
 
-void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pair<pi, int> &assign)
+void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtraced)
 {
     visited[node - 1] = 1;
+    cout << "\n" << node << "\n";
     int v, w;
     for(auto it : revadj[node - 1])
     {
@@ -103,22 +107,27 @@ void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pai
         w = it.second;
         if(visited[v - 1] != 1)
         {
-            if(ntype[v - 1] == 3 || ntype[v - 1] == 4 || ntype[v - 1] == 6 || ntype[v - 1] == 7)
+            if(ntype[v] == 3 || ntype[v] == 4 || ntype[v] == 6 || ntype[v] == 7)
             {
                 obj = 1 - obj;
+                dfs(visited, v, obj, assign, backtraced);
+                if(backtraced == true)
+                {
+                    return;
+                }
+                obj = 1 - obj;
             }
-            if(ntype[v - 1] == -1)
+            if(ntype[v] == -1)
             {
-                if(state[v - 1] == -1)
+                if(state[w] == -1)
                 {
                     assign.first.first = v;
                     assign.first.second = w;
                     assign.second  = obj;
+                    backtraced = true;
                     return;
                 }
             }
-            dfs(revadj, visited, ntype, state, v, obj, assign);
         }
     }
 }
-
