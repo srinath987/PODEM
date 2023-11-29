@@ -28,21 +28,21 @@ Enter the type of node:
 14: 10 16 ;11 17 ;
 15: 
 16: 
-Node 1 is of type -1
+Node 1 is of type 0
 Node 2 is of type -1
 Node 3 is of type -1
 Node 4 is of type -1
 Node 5 is of type -1
-Node 6 is of type 3
+Node 6 is of type -1
 Node 7 is of type 3
 Node 8 is of type 3
 Node 9 is of type 3
 Node 10 is of type 3
 Node 11 is of type 3
-Node 12 is of type 0
+Node 12 is of type 3
 Node 13 is of type 0
 Node 14 is of type 0
-Node 15 is of type -2
+Node 15 is of type 0
 Node 16 is of type -2
 
 10
