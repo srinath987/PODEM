@@ -103,7 +103,7 @@ void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pai
             if(ntype[v - 1] == 3 || ntype[v - 1] == 4 || ntype[v - 1] == 6 || ntype[v - 1] == 7)
             {
                 obj = 1 - obj;
-                dfs(revadj, visited, ntype, state, v, obj, ass, backtraced);
+                dfs(revadj, visited, ntype, state, v, obj, assign, backtraced);
                 if(backtraced == true)
                 {
                     return;
