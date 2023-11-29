@@ -13,4 +13,4 @@ using namespace std;
 
 extern vvp adj, revadj;
 extern mii state, ntype;
-
+extern vi inputs, outputs;
