@@ -81,11 +81,25 @@ vector<int> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<in
 
 }
 
-void backtrace(vvp &revadj, vector<int> &visited, vector<int> &ntype, int numnodes, vector<int> &state, int u, int &obj)
+pair<pi, int> backtrace(vvp &revadj, vi &ntype, vi &state, int u, int &obj)
 {
+    int n = ntype.size();
+    vi visited (n);
+    pair<pi, int> ass = {{0, 0}, -1};
     visited[u - 1] = 1;
+    if(ntype[u - 1] == 3 || ntype[u - 1] == 4 || ntype[u - 1] == 6 || ntype[u - 1] == 7)
+    {
+        obj = 1 - obj;
+    }
+    dfs(revadj, visited, ntype, state, u, obj, ass);
+    return ass;
+}
+
+void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pair<pi, int> &ass)
+{
+    visited[node - 1] = 1;
     int v, w;
-    for(auto it : revadj[u - 1])
+    for(auto it : revadj[node - 1])
     {
         v = it.first;
         w = it.second;
@@ -99,15 +113,13 @@ void backtrace(vvp &revadj, vector<int> &visited, vector<int> &ntype, int numnod
             {
                 if(state[v - 1] == -1)
                 {
-                    state[v - 1] == obj;
+                    ass.first.first = v;
+                    ass.first.second = w;
+                    ass.second  = obj;
                     return;
                 }
-                else if(state[v - 1] != -1 && state[v - 1] != obj)
-                {
-
-                }
             }
-            backtrace(revadj, visited, ntype, numnodes, state, v, obj);
+            dfs(revadj, visited, ntype, state, v, obj, ass);
         }
     }
 }
