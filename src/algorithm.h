@@ -11,6 +11,8 @@ void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &
 
 vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state);
 
-void backtrace(vvp &revadj, vector<int> &visited, vector<int> &ntype, int numnodes, vector<int> &state, int u, int &obj);
+pair<pi, int> backtrace(vvp &revadj, vi &ntype, vi &state, int u, int &obj);
+
+void dfs(vvp &revadj, vi &visited, vi &ntype, vi &state, int node, int &obj, pair<pi, int> &ass);
 
 # endif
