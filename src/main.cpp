@@ -76,6 +76,6 @@ int main()
             PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state);
         }
     }
-    
+
     return 0;
 }

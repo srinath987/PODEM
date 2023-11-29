@@ -63,7 +63,7 @@
 //     return bsurr;
 // }
 
-void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char state)
+void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
 {
     int u = 0, v, w, npi = fpi.size();
     for(int i = 0; i < numnodes; i++)
@@ -89,9 +89,8 @@ void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &
     choices = Objective(adj, revadj, numnodes, npi, ntype, u, v, w, state);
 }
 
-vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
-{
-    vector<vector<int>> ans;
-    vector<int> pi (npi, -1);
+vector<int> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
+{   
+    if(states[])
 }
 
