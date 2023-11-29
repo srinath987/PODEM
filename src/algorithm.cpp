@@ -93,5 +93,37 @@ vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector
 {
     vector<vector<int>> ans;
     vector<int> pi (npi, -1);
+    return ans;
+}
+
+void backtrace(vvp &revadj, vector<int> &visited, vector<int> &ntype, int numnodes, vector<int> &state, int u, int &obj)
+{
+    visited[u - 1] = 1;
+    int v, w;
+    for(auto it : revadj[u - 1])
+    {
+        v = it.first;
+        w = it.second;
+        if(visited[v - 1] != 1)
+        {
+            if(ntype[v - 1] == 3 || ntype[v - 1] == 4 || ntype[v - 1] == 6 || ntype[v - 1] == 7)
+            {
+                obj = 1 - obj;
+            }
+            if(ntype[v - 1] == -1)
+            {
+                if(state[v - 1] == -1)
+                {
+                    state[v - 1] == obj;
+                    return;
+                }
+                else if(state[v - 1] != -1 && state[v - 1] != obj)
+                {
+
+                }
+            }
+            backtrace(revadj, visited, ntype, numnodes, state, v, obj);
+        }
+    }
 }
 
