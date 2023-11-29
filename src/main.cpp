@@ -64,16 +64,31 @@ int main()
     //         branchsurr.push_back(getbranch_surr(adj, numnodes, k, wire_surr[k][1]));
     //     }
     // }
-    for(int i = 0; i < 2; i++)
+    
+// PODEM for all faults possible
+    for(int i = 0; i < numedges; i++)
     {
-        for(int j = 0; j < numedges; j++)
+        fwire = i;
+        for(int j = 0; j < 2; j++)
         {
-            cout << "Considering s-a-" << i << " for wire " << j << endl;
-
-            fwire = j;
-            f_state = f_states[i];
-            
-            PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state);
+            f_state = f_states[j];
+            for(int k = 0; k < npi; k++)
+            {
+                fpi[k] = 0;
+            }
+            if(PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state))
+            {
+                cout << "Fault " << fwire + 1 << " can be detected by test vector: ";
+                for(int k = 0; k < npi; k++)
+                {
+                    cout << fpi[k] << " ";
+                }
+                cout << endl;
+            }
+            else
+            {
+                cout << "Fault " << fwire + 1 << " cannot be detected by any test vector\n";
+            }
         }
     }
 

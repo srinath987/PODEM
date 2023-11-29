@@ -63,37 +63,22 @@
 //     return bsurr;
 // }
 
-void PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
+bool PODEM(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, vector<int> ntype, vector<int> &fpi, int wire, char fault)
 {
-    int u = 0, v, w, npi = fpi.size();
-    for(int i = 0; i < numnodes; i++)
-    {
-        for(auto it : adj[i])
-        {
-            v = it.first;
-            w = it.second;
-            if(w == wire + 1)
-            {
-                u = i + 1;
-                break;
-            }
-        }
-    }
-    if(u == 0)
-    {
-        cout << "Please give a valid wire\n";
-        return;
-    }
-    // objective is to Initialise the fault by assigning primary inputs
-    vector<vector<int>> choices;
-    choices = Objective(adj, revadj, numnodes, npi, ntype, u, v, w, state);
+    // if D or D' at output return true
+    
+
+    // if test impossible return false
 }
 
-vector<vector<int>> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
+vector<int> Objective(vector<vector<pair<int, int>>> &adj, vector<vector<pair<int, int>>> &revadj, int numnodes, int npi, vector<int> ntype, int u, int v, int wire, char state)
 {
-    vector<vector<int>> ans;
-    vector<int> pi (npi, -1);
-    return ans;
+    // returns the objective (n, v) n -> node v -> value
+    if(n == 'x')
+    {
+        return ;
+    }
+
 }
 
 void backtrace(vvp &revadj, vector<int> &visited, vector<int> &ntype, int numnodes, vector<int> &state, int u, int &obj)
