@@ -41,31 +41,7 @@ int main()
     char f_state;
     char f_states[2] = {'D', 'E'};
     vector<int> fpi(npi);
-    // int wire_sur[numedges][6];
-    // vector<vector<int>> branchsurr;
-    // vector<int> tempwsurr;
-    // for(int k = 0; k < numedges; k++)
-    // {
-    //     for(int l = 0; l < 6; l++)
-    //     {
-    //         wire_sur[k][l] = 0;
-    //     }
-    // }
-    // for(int k = 0; k < numedges; k++)
-    // {
-    //     tempsurr = getwire_sur(adj, numnodes, k, ntype);
-    //     for(int l = 0; l < 6; l++)
-    //         wire_sur[k][l] = tempsurr[l];
-    // }
-    // for(int k = 0; k < numedges; k++)
-    // {
-    //     if(ntype[wire_surr[k][1] - 1] == 0)
-    //     {
-    //         branchsurr.push_back(getbranch_surr(adj, numnodes, k, wire_surr[k][1]));
-    //     }
-    // }
-    
-// PODEM for all faults possible
+
     for(int i = 0; i < numedges; i++)
     {
         fwire = i;

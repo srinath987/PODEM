@@ -64,7 +64,12 @@ vector<int> Objective(int wire, int fault)
             for(int i = 0; i < adj.size(); i++) {
                 for(int j = 0; j < adj[i].size(); j++) {
                     if(adj[i][j].second == it.first) {
-                        
+                        node = adj[i][j].first;
+                        for(int k = 0; k < adj[node].size(); k++) {
+                            if(state[adj[node][k].second] == -1) {
+                                
+                            }
+                        }
                     }
                 }
             }
