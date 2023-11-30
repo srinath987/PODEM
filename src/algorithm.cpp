@@ -166,9 +166,7 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
 
 void fimply(int pinp, int val)
 {
-    cout << "\n"
-         << pinp << "\n";
-    for (auto it : adj[pinp - 1])
+    for(auto it : adj[pinp - 1])
     {
         state[it.second] = val;
     }
@@ -257,7 +255,7 @@ void fimply(int pinp, int val)
                     fimply(v, 0);
                 }
             }
-            else if (df > 0 && ef > 0)
+            else if(df == 1 && ef == 1)
             {
                 if (ntype[v] == 3)
                 {
@@ -268,7 +266,7 @@ void fimply(int pinp, int val)
                     fimply(v, 0);
                 }
             }
-            else if (df > 0 && ef == 0)
+            else if(df == 1 && ef == 0)
             {
                 if (ntype[v] == 3)
                 {
@@ -279,7 +277,7 @@ void fimply(int pinp, int val)
                     fimply(v, 2);
                 }
             }
-            else if (df == 0 && ef > 0)
+            else if(df == 0 && ef == 1)
             {
                 if (ntype[v] == 3)
                 {
@@ -289,24 +287,9 @@ void fimply(int pinp, int val)
                 {
                     fimply(v, 3);
                 }
-            }
-            else if (unknown == 0)
-            {
-                if (ntype[v] == 3)
-                {
-                    fimply(v, 0);
-                }
-                else
-                {
-                    fimply(v, 1);
-                }
-            }
-            else
-            {
-                fimply(v, -1);
             }
         }
-        else if (ntype[v] == 2 || ntype[v] == 4)
+        else if(ntype[v] == 2 || ntype[v] == 4)
         {
             if (logic == 1)
             {
@@ -319,7 +302,7 @@ void fimply(int pinp, int val)
                     fimply(v, 1);
                 }
             }
-            else if (df > 0 && ef > 0)
+            else if(df == 1 && ef == 1)
             {
                 if (ntype[v] == 4)
                 {
@@ -330,7 +313,7 @@ void fimply(int pinp, int val)
                     fimply(v, 1);
                 }
             }
-            else if (df > 0 && ef == 0)
+            else if(df == 1 && ef == 0)
             {
                 if (ntype[v] == 4)
                 {
@@ -341,7 +324,7 @@ void fimply(int pinp, int val)
                     fimply(v, 2);
                 }
             }
-            else if (df == 0 && ef > 0)
+            else if(df == 0 && ef == 1)
             {
                 if (ntype[v] == 4)
                 {
@@ -352,9 +335,12 @@ void fimply(int pinp, int val)
                     fimply(v, 3);
                 }
             }
-            else if (unknown == 0)
+        }
+        else if(ntype[v] == 5 || ntype[v] == 6)
+        {
+            if(logic == 1)
             {
-                if (ntype[v] == 4)
+                if(ntype[v] == 6)
                 {
                     fimply(v, 1);
                 }
