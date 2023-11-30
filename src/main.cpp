@@ -4,8 +4,8 @@
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("input1.txt", "r", stdin);
+    freopen("output1.txt", "w", stdout);
     int npi;
     cout << "Enter the number of nodes (Branching points, gates, inputs, outputs): \n";
     cin >> numnodes;
@@ -41,36 +41,36 @@ int main()
     {
         cout << "Node " << i + 1 << " is of type " << ntype[i] << endl;
     }
-    int fwire;
-    char f_state;
-    char f_states[2] = {'D', 'E'};
-    vector<int> fpi(npi);
+    // int fwire;
+    // char f_state;
+    // char f_states[2] = {'D', 'E'};
+    // vector<int> fpi(npi);
 
-    for(int i = 0; i < numedges; i++)
-    {
-        fwire = i;
-        for(int j = 0; j < 2; j++)
-        {
-            f_state = f_states[j];
-            for(int k = 0; k < npi; k++)
-            {
-                fpi[k] = 0;
-            }
-            if(PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state))
-            {
-                cout << "Fault " << fwire + 1 << " can be detected by test vector: ";
-                for(int k = 0; k < npi; k++)
-                {
-                    cout << fpi[k] << " ";
-                }
-                cout << endl;
-            }
-            else
-            {
-                cout << "Fault " << fwire + 1 << " cannot be detected by any test vector\n";
-            }
-        }
-    }
+    // for(int i = 0; i < numedges; i++)
+    // {
+    //     fwire = i;
+    //     for(int j = 0; j < 2; j++)
+    //     {
+    //         f_state = f_states[j];
+    //         for(int k = 0; k < npi; k++)
+    //         {
+    //             fpi[k] = 0;
+    //         }
+    //         if(PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state))
+    //         {
+    //             cout << "Fault " << fwire + 1 << " can be detected by test vector: ";
+    //             for(int k = 0; k < npi; k++)
+    //             {
+    //                 cout << fpi[k] << " ";
+    //             }
+    //             cout << endl;
+    //         }
+    //         else
+    //         {
+    //             cout << "Fault " << fwire + 1 << " cannot be detected by any test vector\n";
+    //         }
+    //     }
+    // }
 
 
 // PODEM for all faults possible
@@ -101,9 +101,9 @@ int main()
     // }
 
 // Debugging backtrace
-    int u = 10;
-    int obj = 0;
-    pair<pi, int> assign = backtrace(u, obj);
-    cout << "PI: " << assign.first.first << "PI wire: " << assign.first.second << "Value: " << assign.second;
-    return 0;
+    // int u = 10;
+    // int obj = 0;
+    // pair<pi, int> assign = backtrace(u, obj);
+    // cout << "PI: " << assign.first.first << "PI wire: " << assign.first.second << "Value: " << assign.second;
+    // return 0;
 }
