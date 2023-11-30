@@ -16,21 +16,12 @@ bool PODEM(int wire, int fault)
     int onode = nv[0];
     int owire = nv[1];
     int ovalue = nv[2];
-    cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
+    // cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
     if (onode == -1 || owire == -1 || ovalue == -1)
     {
         return false;
     }
-
-    if (fault == 0)
-    {
-        state[owire] = 2;
-    }
-    else
-    {
-        state[owire] = 3;
-    }
-
+    
     pair<pi, int> pv = backtrace(onode, ovalue);
     int pnd = pv.first.first;
     int pwr = pv.first.second;
@@ -40,36 +31,36 @@ bool PODEM(int wire, int fault)
     {
         return false;
     }
-    cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
+    // cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
     stackstate.push(state);
-    fimply(pnd, pval);
-    for (auto it : state)
-    {
-        cout << "Wire " << it.first << " is " << it.second << endl;
-    }
+    fimply(pnd, pval, wire, fault);
+    // for (auto it : state)
+    // {
+    //     cout << "Wire " << it.first << " is " << it.second << endl;
+    // }
 
     if (PODEM(wire, fault))
     {
         return true;
     }
 
-    cout << "Backtracking, forward implying\n";
+    // cout << "Backtracking, forward implying\n";
     if (pval == 0)
         pval = 1;
     else
         pval = 0;
     state = stackstate.top();
-    fimply(pnd, pval);
-    for (auto it : state)
-    {
-        cout << "Wire " << it.first << " is " << it.second << endl;
-    }
+    fimply(pnd, pval, wire, fault);
+    // for (auto it : state)
+    // {
+    //     cout << "Wire " << it.first << " is " << it.second << endl;
+    // }
 
     if (PODEM(wire, fault))
     {
         return true;
     }
-    cout << "Invalid input\n";
+    // cout << "Invalid input\n";
     stackstate.pop();
     return false;
 }
@@ -79,6 +70,7 @@ vector<int> Objective(int wire, int fault)
     // returns the objective (n, v) n -> node v -> value
     if (state[wire] == -1)
     {
+        finit = true;
         int currnode;
         for (int i = 0; i < adj.size(); i++)
         {
@@ -100,6 +92,7 @@ vector<int> Objective(int wire, int fault)
         }
     }
     // propagate the fault to the output
+    finit = false;
     for (auto it : state)
     {
         if (it.second == 2 || it.second == 3)
@@ -113,13 +106,15 @@ vector<int> Objective(int wire, int fault)
                     {
                         currnode = i;
                         nxtnode = adj[i][j].first - 1;
+                        // cout << "current node: " << currnode + 1 << " next node: " << nxtnode + 1 << "\n";
                         for (int k = 0; k < adj[nxtnode].size(); k++)
                         {
                             if (state[adj[nxtnode][k].second] == -1)
                             {
+                                // cout << "Found x\n";
                                 for (int l = 0; l < revadj[nxtnode].size(); l++)
                                 {
-                                    if (revadj[nxtnode][l].first != currnode && state[revadj[nxtnode][l].second] == -1)
+                                    if (revadj[nxtnode][l].first != currnode + 1 && state[revadj[nxtnode][l].second] == -1)
                                     {
                                         if (ntype[nxtnode] == 6 || ntype[nxtnode] == 2 || ntype[nxtnode] == 4 || ntype[nxtnode] == 5)
                                             return {revadj[nxtnode][l].first, revadj[nxtnode][l].second, 0};
@@ -163,8 +158,8 @@ pair<pi, int> backtrace(int u, int &obj)
 void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtraced)
 {
     visited[node - 1] = 1;
-    cout << "\n"
-         << node << "\n";
+    // cout << "\n"
+    //      << node << "\n";
     int v, w;
     for (auto it : revadj[node - 1])
     {
@@ -205,12 +200,24 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
     }
 }
 
-void fimply(int pinp, int val)
+void fimply(int pinp, int val, int fwire, int fval)
 {
     for (auto it : adj[pinp - 1])
     {
-        if (state[it.second] == 2 || state[it.second] == 3)
+        if (it.second == fwire  && finit == true)
         {
+            if(val == 1 - fval)
+            {
+                // cout << " fault getting initialized\n";
+                if(fval == 0)
+                {
+                    state[it.second] = 2;
+                }
+                else 
+                {
+                    state[it.second] = 3;
+                }
+            }
             continue;
         }
         state[it.second] = val;
@@ -231,22 +238,22 @@ void fimply(int pinp, int val)
         ef = 0;
         if (ntype[v] == 0)
         {
-            fimply(v, val);
+            fimply(v, state[w], fwire, fval);
             continue;
         }
         else if (ntype[v] == 7)
         {
-            if (val == 0 || val == 1)
+            if (state[w] == 0 || state[w] == 1)
             {
-                fimply(v, 1 - val);
+                fimply(v, 1 - state[w], fwire, fval);
             }
-            else if (val == 2)
+            else if (state[w] == 2)
             {
-                fimply(v, 3);
+                fimply(v, 3, fwire, fval);
             }
-            else if (val == 3)
+            else if (state[w] == 3)
             {
-                fimply(v, 2);
+                fimply(v, 2, fwire, fval);
             }
             continue;
         }
@@ -293,11 +300,11 @@ void fimply(int pinp, int val)
             {
                 if (ntype[v] == 3)
                 {
-                    fimply(v, 1);
+                    fimply(v, 1, fwire, fval);
                 }
                 else
                 {
-                    fimply(v, 0);
+                    fimply(v, 0, fwire, fval);
                 }
             }
             else if (logic == 1)
@@ -306,49 +313,49 @@ void fimply(int pinp, int val)
                 {
                     if (ntype[v] == 3)
                     {
-                        fimply(v, 1);
+                        fimply(v, 1, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 0);
+                        fimply(v, 0, fwire, fval);
                     }
                 }
                 else if (df == 1 && ef == 0)
                 {
                     if (ntype[v] == 3)
                     {
-                        fimply(v, 3);
+                        fimply(v, 3, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 2);
+                        fimply(v, 2, fwire, fval);
                     }
                 }
                 else if (df == 0 && ef == 1)
                 {
                     if (ntype[v] == 3)
                     {
-                        fimply(v, 2);
+                        fimply(v, 2, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 3);
+                        fimply(v, 3, fwire, fval);
                     }
                 }
                 else if(unknown == 0)
                 {
                     if (ntype[v] == 3)
                     {
-                        fimply(v, 0);
+                        fimply(v, 0, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 1);
+                        fimply(v, 1, fwire, fval);
                     }
                 }
                 else
                 {
-                    fimply(v, -1);
+                    fimply(v, -1, fwire, fval);
                 }
             }
             else
@@ -357,16 +364,16 @@ void fimply(int pinp, int val)
                 {
                     if (ntype[v] == 3)
                     {
-                        fimply(v, 1);
+                        fimply(v, 1, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 0);
+                        fimply(v, 0, fwire, fval);
                     }
                 }
                 else
                 {
-                    fimply(v, -1);
+                    fimply(v, -1, fwire, fval);
                 }
             }
         }
@@ -376,11 +383,11 @@ void fimply(int pinp, int val)
             {
                 if (ntype[v] == 4)
                 {
-                    fimply(v, 0);
+                    fimply(v, 0, fwire, fval);
                 }
                 else
                 {
-                    fimply(v, 1);
+                    fimply(v, 1, fwire, fval);
                 }
             }
             else if (logic == 0)
@@ -389,44 +396,44 @@ void fimply(int pinp, int val)
                 {
                     if (ntype[v] == 4)
                     {
-                        fimply(v, 0);
+                        fimply(v, 0, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 1);
+                        fimply(v, 1, fwire, fval);
                     }
                 }
                 else if (df == 1 && ef == 0)
                 {
                     if (ntype[v] == 4)
                     {
-                        fimply(v, 3);
+                        fimply(v, 3, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 2);
+                        fimply(v, 2, fwire, fval);
                     }
                 }
                 else if (df == 0 && ef == 1)
                 {
                     if (ntype[v] == 4)
                     {
-                        fimply(v, 2);
+                        fimply(v, 2, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 3);
+                        fimply(v, 3, fwire, fval);
                     }
                 }
                 else if(unknown == 0)
                 {
                     if (ntype[v] == 4)
                     {
-                        fimply(v, 1);
+                        fimply(v, 1, fwire, fval);
                     }
                     else
                     {
-                        fimply(v, 0);
+                        fimply(v, 0, fwire, fval);
                     }
                 }
                 else
@@ -435,16 +442,16 @@ void fimply(int pinp, int val)
                     {
                         if (ntype[v] == 4)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                         else
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                     }
                     else
                     {
-                        fimply(v, -1);
+                        fimply(v, -1, fwire, fval);
                     }
                 }
             }
@@ -459,57 +466,57 @@ void fimply(int pinp, int val)
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                     }
                     else if (logic == 1)
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                     }
                     else
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                     }
                 }
@@ -519,64 +526,64 @@ void fimply(int pinp, int val)
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                     }
                     else if (logic == 1)
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                     }
                     else
                     {
                         if (df % 2 == 1 && ef % 2 == 1)
                         {
-                            fimply(v, 0);
+                            fimply(v, 0, fwire, fval);
                         }
                         else if (df % 2 == 1 && ef % 2 == 0)
                         {
-                            fimply(v, 3);
+                            fimply(v, 3, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 1)
                         {
-                            fimply(v, 2);
+                            fimply(v, 2, fwire, fval);
                         }
                         else if (df % 2 == 0 && ef % 2 == 0)
                         {
-                            fimply(v, 1);
+                            fimply(v, 1, fwire, fval);
                         }
                     }
                 }
             }
             else
             {
-                fimply(v, -1);
+                fimply(v, -1, fwire, fval);
             }
         }
     }

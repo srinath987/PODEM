@@ -44,254 +44,893 @@ Node 13 is of type 0
 Node 14 is of type 0
 Node 15 is of type -2
 Node 16 is of type -2
+
 Fault 0 on wire 1:
 Objective: 1 1 1
 Backtraced: 1 1 1 forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is -1
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is -1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is -1
-Wire 13 is -1
-Wire 14 is -1
-Wire 15 is -1
-Wire 16 is -1
-Wire 17 is -1
+ fault getting initialized
 Objective: 12 12 1
 
 12
 Backtraced: 3 3 1 forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is 1
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is -1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is 2
-Wire 13 is 1
-Wire 14 is -1
-Wire 15 is -1
-Wire 16 is -1
-Wire 17 is -1
-Objective: -1 -1 -1
-Backtracking, forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is 1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is -1
-Wire 17 is -1
-Objective: -1 -1 -1
-Invalid input
-Backtracking, forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is -1
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is -1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is -1
-Wire 13 is -1
-Wire 14 is -1
-Wire 15 is -1
-Wire 16 is -1
-Wire 17 is -1
-Objective: 12 12 1
-
-12
-Backtraced: 3 3 1 forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is 1
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is -1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is 2
-Wire 13 is 1
-Wire 14 is -1
-Wire 15 is -1
-Wire 16 is -1
-Wire 17 is -1
-Objective: -1 -1 -1
-Backtracking, forward implying
-Wire 1 is 2
-Wire 2 is -1
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is -1
-Wire 7 is 1
-Wire 8 is -1
-Wire 9 is -1
-Wire 10 is -1
-Wire 11 is -1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is -1
-Wire 17 is -1
-Objective: -1 -1 -1
-Invalid input
-Invalid input
-Fault 0on wire 1 cannot be detected by any test vector
-Fault 1 on wire 1:
-Objective: -1 -1 -1
-Fault 1on wire 1 cannot be detected by any test vector
-Fault 0 on wire 6:
-Objective: 6 6 1
-
-6
-
-12
-Fault 0on wire 6 cannot be detected by any test vector
-Fault 1 on wire 6:
 Objective: 14 16 1
 
 14
 
 8
 Backtraced: 2 2 0 forward implying
-Wire 1 is 2
-Wire 2 is 0
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is 2
-Wire 7 is 1
-Wire 8 is 1
-Wire 9 is -1
-Wire 10 is 1
-Wire 11 is -1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is 3
-Wire 17 is 1
-Objective: -1 -1 -1
-Backtracking, forward implying
-Wire 1 is 2
-Wire 2 is 1
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is -1
-Wire 6 is 2
-Wire 7 is 1
-Wire 8 is 0
-Wire 9 is -1
-Wire 10 is 1
-Wire 11 is 1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is 3
-Wire 17 is 0
-Objective: -1 -1 -1
-Invalid input
-Fault 1on wire 6 cannot be detected by any test vector
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 1:
+Objective: 1 1 0
+Backtraced: 1 1 0 forward implying
+ fault getting initialized
+Objective: 12 12 1
+
+12
+Backtraced: 3 3 1 forward implying
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 2:
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+ fault getting initialized
+Objective: 13 14 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 2:
+Objective: 2 2 0
+Backtraced: 2 2 0 forward implying
+ fault getting initialized
+Objective: 13 14 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 3:
+Objective: 3 3 1
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 1 1 1
+Backtraced: 1 1 1 forward implying
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 3:
+Objective: 3 3 0
+Backtraced: 3 3 0 forward implying
+ fault getting initialized
+Objective: 1 1 1
+Backtraced: 1 1 1 forward implying
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 0
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 4:
+Objective: 4 4 1
+Backtraced: 4 4 1 forward implying
+ fault getting initialized
+Objective: 12 13 1
+
+12
+Backtraced: 3 3 1 forward implying
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: 1
+
+
+
+
+Fault 1 on wire 4:
+Objective: 4 4 0
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 12 13 1
+
+12
+Backtraced: 3 3 1 forward implying
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: 1
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
+Fault 0 on wire 5:
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+ fault getting initialized
+Objective: 13 15 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
+Fault 1 on wire 5:
+Objective: 5 5 0
+Backtraced: 5 5 0 forward implying
+ fault getting initialized
+Objective: 13 15 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 0
+
+
+
+
+Fault 0 on wire 6:
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+ fault getting initialized
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 6:
+Objective: 6 6 0
+
+6
+Backtraced: 1 1 1 forward implying
+Objective: 6 6 0
+
+6
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
 Fault 0 on wire 7:
-Objective: -1 -1 -1
-Fault 0on wire 7 cannot be detected by any test vector
+Objective: 7 7 1
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
 Fault 1 on wire 7:
-Objective: -1 -1 -1
-Fault 1on wire 7 cannot be detected by any test vector
+Objective: 7 7 0
+
+7
+Backtraced: 4 4 1 forward implying
+Objective: 7 7 0
+
+7
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: 1
+
+
+
+
 Fault 0 on wire 8:
-Objective: -1 -1 -1
-Fault 0on wire 8 cannot be detected by any test vector
+Objective: 8 8 1
+
+8
+Backtraced: 2 2 0 forward implying
+ fault getting initialized
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
 Fault 1 on wire 8:
-Objective: -1 -1 -1
-Fault 1on wire 8 cannot be detected by any test vector
+Objective: 8 8 0
+
+8
+Backtraced: 2 2 1 forward implying
+Objective: 8 8 0
+
+8
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: X
+
+
+
+
 Fault 0 on wire 9:
 Objective: 9 9 1
 
 9
 Backtraced: 5 5 0 forward implying
-Wire 1 is 2
-Wire 2 is 1
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is 0
-Wire 6 is 2
-Wire 7 is 1
-Wire 8 is 0
-Wire 9 is 2
-Wire 10 is 1
-Wire 11 is 1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is 3
-Wire 17 is 0
-Objective: -1 -1 -1
-Backtracking, forward implying
-Wire 1 is 2
-Wire 2 is 1
-Wire 3 is 0
-Wire 4 is -1
-Wire 5 is 1
-Wire 6 is 2
-Wire 7 is 1
-Wire 8 is 0
-Wire 9 is 2
-Wire 10 is 1
-Wire 11 is 1
-Wire 12 is 2
-Wire 13 is 0
-Wire 14 is 1
-Wire 15 is 1
-Wire 16 is 3
-Wire 17 is 0
-Objective: -1 -1 -1
-Invalid input
-Fault 0on wire 9 cannot be detected by any test vector
+ fault getting initialized
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: X
+Input: 5 Value: 0
+
+
+
+
 Fault 1 on wire 9:
-Objective: -1 -1 -1
-Fault 1on wire 9 cannot be detected by any test vector
+Objective: 9 9 0
+
+9
+Backtraced: 5 5 1 forward implying
+Objective: 9 9 0
+
+9
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
+Fault 0 on wire 10:
+Objective: 10 10 1
+
+10
+
+6
+Backtraced: 1 1 1 forward implying
+Objective: 10 10 1
+
+10
+
+6
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: X
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 10:
+Objective: 10 10 0
+
+10
+
+6
+Backtraced: 1 1 0 forward implying
+Objective: 10 10 0
+
+10
+
+6
+
+12
+Backtraced: 3 3 0 forward implying
+Objective: 10 10 0
+
+10
+
+6
+
+12
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+ fault getting initialized
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: 0
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 11:
+Objective: 11 11 1
+
+11
+
+9
+Backtraced: 5 5 1 forward implying
+Objective: 11 11 1
+
+11
+
+9
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: X
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
+Fault 1 on wire 11:
+Objective: 11 11 0
+
+11
+
+9
+Backtraced: 5 5 0 forward implying
+Objective: 11 11 0
+
+11
+
+9
+
+13
+
+7
+Backtraced: 4 4 1 forward implying
+Objective: 11 11 0
+
+11
+
+9
+
+13
+
+7
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+ fault getting initialized
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: X
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: 0
+
+
+
+
+Fault 0 on wire 12:
+Objective: 12 12 1
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 1 1 1
+Backtraced: 1 1 1 forward implying
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 1
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 12:
+Objective: 12 12 0
+
+12
+Backtraced: 3 3 0 forward implying
+ fault getting initialized
+Objective: 1 1 1
+Backtraced: 1 1 1 forward implying
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 1
+Input: 2 Value: 0
+Input: 3 Value: 0
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 13:
+Objective: 12 13 1
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 4 4 1
+Backtraced: 4 4 1 forward implying
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: 1
+
+
+
+
+Fault 1 on wire 13:
+Objective: 12 13 0
+
+12
+Backtraced: 3 3 0 forward implying
+ fault getting initialized
+Objective: 4 4 1
+Backtraced: 4 4 1 forward implying
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 1
+Input: 3 Value: 0
+Input: 4 Value: 1
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 14:
+Objective: 13 14 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: X
+
+
+
+
+Fault 1 on wire 14:
+Objective: 13 14 0
+
+13
+
+7
+Backtraced: 4 4 1 forward implying
+Objective: 13 14 0
+
+13
+
+7
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 2 2 1
+Backtraced: 2 2 1 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 1
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: X
+
+
+
+
+Fault 0 on wire 15:
+Objective: 13 15 1
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 1
+
+
+
+
+Fault 1 on wire 15:
+Objective: 13 15 0
+
+13
+
+7
+Backtraced: 4 4 1 forward implying
+Objective: 13 15 0
+
+13
+
+7
+
+12
+Backtraced: 3 3 1 forward implying
+ fault getting initialized
+Objective: 5 5 1
+Backtraced: 5 5 1 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: X
+Input: 3 Value: 1
+Input: 4 Value: 1
+Input: 5 Value: 1
+
+
+
+
 Fault 0 on wire 16:
-Objective: -1 -1 -1
-Fault 0on wire 16 cannot be detected by any test vector
+Objective: 14 16 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+ fault getting initialized
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: X
+Input: 5 Value: X
+
+
+
+
 Fault 1 on wire 16:
-Objective: -1 -1 -1
-Fault 1on wire 16 cannot be detected by any test vector
+Objective: 14 16 0
+
+14
+
+8
+Backtraced: 2 2 1 forward implying
+Objective: 14 16 0
+
+14
+
+8
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 6 6 1
+
+6
+Backtraced: 1 1 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: 0
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: X
+
+
+
+
 Fault 0 on wire 17:
-Objective: -1 -1 -1
-Fault 0on wire 17 cannot be detected by any test vector
+Objective: 14 17 1
+
+14
+
+8
+Backtraced: 2 2 0 forward implying
+ fault getting initialized
+Objective: 9 9 1
+
+9
+Backtraced: 5 5 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 0
+Input: 3 Value: X
+Input: 4 Value: X
+Input: 5 Value: 0
+
+
+
+
 Fault 1 on wire 17:
-Objective: -1 -1 -1
-Fault 1on wire 17 cannot be detected by any test vector
+Objective: 14 17 0
+
+14
+
+8
+Backtraced: 2 2 1 forward implying
+Objective: 14 17 0
+
+14
+
+8
+
+13
+
+7
+Backtraced: 4 4 0 forward implying
+ fault getting initialized
+Objective: 9 9 1
+
+9
+Backtraced: 5 5 0 forward implying
+It can be detected by test vector: 
+Input: 1 Value: X
+Input: 2 Value: 1
+Input: 3 Value: X
+Input: 4 Value: 0
+Input: 5 Value: 0
+
+
+
+

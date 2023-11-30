@@ -19,5 +19,6 @@ mii state, ntype;
 stmii stackstate;
 vi inputs, outputs;
 int numnodes, numedges;
+bool finit;
 
 #endif
