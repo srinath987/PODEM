@@ -16,16 +16,21 @@ bool PODEM(int wire, int fault)
     int onode = nv[0];
     int owire = nv[1];
     int ovalue = nv[2];
-    
+    cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
+    if(onode == -1 || owire == -1 || ovalue == -1)
+    {
+        return false;
+    }
     pair<pi, int> pv = backtrace(onode, ovalue);
     int pnd = pv.first.first;
     int pwr = pv.first.second;
     int pval = pv.second;
 
-    if(pnd == -1)
+    if(pnd == -1 || pwr == -1 || pval == -1)
     {
         return false;
     }
+    cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
     stackstate.push(state);
     fimply(pnd, pval);
 
@@ -34,6 +39,7 @@ bool PODEM(int wire, int fault)
         return true;
     }
 
+    cout << "Backtracking, forward implying\n";
     if (pval == 0)
         pval = 1;
     else
@@ -45,6 +51,7 @@ bool PODEM(int wire, int fault)
     {
         return true;
     }
+    cout << "Invalid input\n";
     stackstate.pop();
     return false;
 }
@@ -130,11 +137,11 @@ pair<pi, int> backtrace(int u, int &obj)
 void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtraced)
 {
     visited[node - 1] = 1;
-    // cout << "\n"
-    //      << node << "\n";
+    cout << "\n"
+         << node << "\n";
     int v, w;
     for (auto it : revadj[node - 1])
-    {
+    {   
         v = it.first;
         w = it.second;
         if (visited[v - 1] != 1)
@@ -149,7 +156,7 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
                 }
                 obj = 1 - obj;
             }
-            if (ntype[v] == -1)
+            else if (ntype[v] == -1)
             {
                 if (state[w] == -1)
                 {
@@ -157,6 +164,14 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
                     assign.first.second = w;
                     assign.second = obj;
                     backtraced = true;
+                    return;
+                }
+            }
+            else
+            {
+                dfs(visited, v, obj, assign, backtraced);
+                if (backtraced == true)
+                {
                     return;
                 }
             }
