@@ -22,6 +22,11 @@ bool PODEM(int wire, int fault)
     int pwr = pv.first.second;
     int pval = pv.second;
 
+    if(pnd == -1)
+    {
+        return false;
+    }
+    stackstate.push(state);
     fimply(pnd, pval);
 
     if (PODEM(wire, fault))
@@ -33,16 +38,14 @@ bool PODEM(int wire, int fault)
         pval = 1;
     else
         pval = 0;
-
+    state = stackstate.top();
     fimply(pnd, pval);
 
     if (PODEM(wire, fault))
     {
         return true;
     }
-
-    forwardimpl(adj, revadj, ntype, p, -1);
-
+    stackstate.pop();
     return false;
 }
 
@@ -113,7 +116,7 @@ vector<int> Objective(int wire, int fault)
 pair<pi, int> backtrace(int u, int &obj)
 {
     vi visited(numnodes, 0);
-    pair<pi, int> assign = {{0, 0}, -1};
+    pair<pi, int> assign = {{-1, -1}, -1};
     bool backtraced = false;
     visited[u - 1] = 1;
     if (ntype[u] == 3 || ntype[u] == 4 || ntype[u] == 6 || ntype[u] == 7)
@@ -127,8 +130,8 @@ pair<pi, int> backtrace(int u, int &obj)
 void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtraced)
 {
     visited[node - 1] = 1;
-    cout << "\n"
-         << node << "\n";
+    // cout << "\n"
+    //      << node << "\n";
     int v, w;
     for (auto it : revadj[node - 1])
     {

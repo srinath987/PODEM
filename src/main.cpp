@@ -34,7 +34,7 @@ int main()
         if (type == -1)
         {
             npi++;
-            inputs.push_back(adj[i][0].second);
+            inputs.push_back(i + 1);
         }
         if (type == -2)
         {
@@ -44,37 +44,31 @@ int main()
     printcircuit(adj, numnodes);
     for (int i = 0; i < numnodes; i++)
     {
-        cout << "Node " << i + 1 << " is of type " << ntype[i] << endl;
+        cout << "Node " << i + 1 << " is of type " << ntype[i + 1] << endl;
     }
 
     int fwire;
-    char f_state;
-    char f_states[2] = {'D', 'E'};
-    vector<int> fpi(npi);
-
     // PODEM for all faults possible
-    for (int i = 0; i < numedges; i++)
+    for (auto it : state)
     {
-        fwire = i;
+        fwire = it.first;
         for (int j = 0; j < 2; j++)
         {
-            f_state = f_states[j];
-            for (int k = 0; k < npi; k++)
+            if (PODEM(fwire, j))
             {
-                fpi[k] = 0;
-            }
-            if (PODEM(adj, revadj, numnodes, ntype, fpi, fwire, f_state))
-            {
-                cout << "Fault " << fwire + 1 << " can be detected by test vector: ";
+                cout << "Fault " << j << "on wire" << fwire << " can be detected by test vector: ";
                 for (int k = 0; k < npi; k++)
                 {
-                    cout << fpi[k] << " ";
+                    cout << "Input: " << inputs[k] << " " << state[adj[inputs[k] - 1][0].second] << "\n";
                 }
-                cout << endl;
             }
             else
             {
-                cout << "Fault " << fwire + 1 << " cannot be detected by any test vector\n";
+                cout << "Fault " << j << "on wire" << fwire << " cannot be detected by any test vector\n";
+            }
+            while(!stackstate.empty())
+            {
+                stackstate.pop();
             }
         }
     }

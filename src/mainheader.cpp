@@ -11,11 +11,12 @@ using namespace std;
 #define pi pair<int, int>
 #define mii map<int, int>
 #define msi map<string, int>
-#define stm stack<map<int, int>>
+#define stmii stack<map<int, int>>
 #define mivp map<int, vp>
 
 vvp adj, revadj;
 mii state, ntype;
+stmii stackstate;
 vi inputs, outputs;
 int numnodes, numedges;
 

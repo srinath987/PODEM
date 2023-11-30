@@ -44,26 +44,3 @@ Node 13 is of type 0
 Node 14 is of type 0
 Node 15 is of type 0
 Node 16 is of type -2
-
-1
-
-6
-
-10
-Wire is 1 0
-Wire is 2 -1
-Wire is 3 -1
-Wire is 4 -1
-Wire is 5 -1
-Wire is 6 1
-Wire is 7 -1
-Wire is 8 -1
-Wire is 9 -1
-Wire is 10 2
-Wire is 11 -1
-Wire is 12 -1
-Wire is 13 -1
-Wire is 14 -1
-Wire is 15 -1
-Wire is 16 3
-Wire is 17 -1
