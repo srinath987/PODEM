@@ -11,6 +11,7 @@ int main()
     cin >> numnodes;
     cout << "Enter the number of edges (Wires): \n";
     cin >> numedges;
+    state.clear();
     for (int i = 0; i < numnodes; i++)
     {
         adj.push_back(vp(0));
@@ -49,101 +50,114 @@ int main()
 
     int fwire, fval;
     bool possible;
-    // PODEM for all faults possible
-    // cout << "\n";
-    // cout << "Enter the wire and fault to be detected: \n";
-    // cin >> fwire;
-    // cin >> fval;
-    // possible = PODEM(fwire, fval);
-    // if (possible)
-    // {
-    //     cout << "It can be detected by test vector: \n";
-    //     for (int k = 0; k < npi; k++)
-    //     {
-    //         cout << "Input: " << inputs[k] << " Value: ";
-    //         if (state[adj[inputs[k] - 1][0].second] == 2)
-    //         {
-    //             cout << "1"
-    //                  << "\n";
-    //         }
-    //         else if (state[adj[inputs[k] - 1][0].second] == 3)
-    //         {
-    //             cout << "0"
-    //                  << "\n";
-    //         }
-    //         else if (state[adj[inputs[k] - 1][0].second] == -1)
-    //         {
-    //             cout << "X"
-    //                  << "\n";
-    //         }
-    //         else
-    //         {
-    //             cout << state[adj[inputs[k] - 1][0].second] << "\n";
-    //         }
-    //     }
-    // }
-    // else
-    // {
-    //     cout << "It cannot be detected by any test vector\n";
-    // }
-    // while (!stackstate.empty())
-    // {
-    //     stackstate.pop();
-    // }
-    // for (auto it1 : state)
-    // {
-    //     state[it1.first] = -1;
-    // }
-    for (auto it : state)
+
+    cout << "Enter the wire and fault to be detected: \n";
+    cin >> fwire;
+    cin >> fval;
+    cout << "Fault " << fval << " on wire " << fwire << ":\n";
+    finit = false;
+    
+    possible = PODEM(fwire, fval);
+    if (possible)
     {
-        fwire = it.first;
-        for (int j = 0; j < 2; j++)
+        cout << "It can be detected by test vector: \n";
+        for (int k = 0; k < npi; k++)
         {
-            cout << "Fault " << j << " on wire " << fwire << ":\n";
-            finit = false;
-            possible = PODEM(fwire, j);
-            if (possible)
+            cout << "Input: " << inputs[k] << " Value: ";
+            if (state[adj[inputs[k] - 1][0].second] == 2)
             {
-                cout << "It can be detected by test vector: \n";
-                for (int k = 0; k < npi; k++)
-                {
-                    cout << "Input: " << inputs[k] << " Value: ";
-                    if (state[adj[inputs[k] - 1][0].second] == 2)
-                    {
-                        cout << "1"
-                             << "\n";
-                    }
-                    else if (state[adj[inputs[k] - 1][0].second] == 3)
-                    {
-                        cout << "0"
-                             << "\n";
-                    }
-                    else if (state[adj[inputs[k] - 1][0].second] == -1)
-                    {
-                        cout << "X"
-                             << "\n";
-                    }
-                    else
-                    {
-                        cout << state[adj[inputs[k] - 1][0].second] << "\n";
-                    }
-                }
+                cout << "1"
+                     << "\n";
+            }
+            else if (state[adj[inputs[k] - 1][0].second] == 3)
+            {
+                cout << "0"
+                     << "\n";
+            }
+            else if (state[adj[inputs[k] - 1][0].second] == -1)
+            {
+                cout << "X"
+                     << "\n";
             }
             else
             {
-                cout << "It cannot be detected by any test vector\n";
+                cout << state[adj[inputs[k] - 1][0].second] << "\n";
             }
-            while (!stackstate.empty())
-            {
-                stackstate.pop();
-            }
-            for (auto it1 : state)
-            {
-                state[it1.first] = -1;
-            }
-            cout << "\n\n\n\n";
         }
     }
+    else
+    {
+        cout << "It cannot be detected by any test vector\n";
+    }
+
+    while (!stackstate.empty())
+    {
+        stackstate.pop();
+    }
+    for (auto it1 : state)
+    {
+        state[it1.first] = -1;
+    }
+
+
+
+    // PODEM for all faults possible
+    // for (auto it1 : state)
+    // {
+    //     cout << "Wire is " << it1.first << " " << it1.second << endl;
+    // }
+    // for (auto it : state)
+    // {
+    //     fwire = it.first;
+    //     for (int j = 0; j < 2; j++)
+    //     {
+    //         cout << "Fault " << j << " on wire " << fwire << ":\n";
+    //         finit = false;
+    //         possible = PODEM(fwire, j);
+    //         if (possible)
+    //         {
+    //             cout << "It can be detected by test vector: \n";
+    //             for (int k = 0; k < npi; k++)
+    //             {
+    //                 cout << "Input: " << inputs[k] << " Value: ";
+    //                 if (state[adj[inputs[k] - 1][0].second] == 2)
+    //                 {
+    //                     cout << "1"
+    //                          << "\n";
+    //                 }
+    //                 else if (state[adj[inputs[k] - 1][0].second] == 3)
+    //                 {
+    //                     cout << "0"
+    //                          << "\n";
+    //                 }
+    //                 else if (state[adj[inputs[k] - 1][0].second] == -1)
+    //                 {
+    //                     cout << "X"
+    //                          << "\n";
+    //                 }
+    //                 else
+    //                 {
+    //                     cout << state[adj[inputs[k] - 1][0].second] << "\n";
+    //                 }
+    //             }
+    //         }
+    //         else
+    //         {
+    //             cout << "It cannot be detected by any test vector\n";
+    //         }
+    //         while (!stackstate.empty())
+    //         {
+    //             stackstate.pop();
+    //         }
+    //         for (auto it1 : state)
+    //         {
+    //             state[it1.first] = -1;
+    //         }
+    //         cout << "\n\n\n\n";
+    //     }
+    // }
+
+
 
     // // Debugging backtrace
     // int u = 10;
