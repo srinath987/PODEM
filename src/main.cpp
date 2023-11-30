@@ -54,9 +54,11 @@ int main()
         fwire = it.first;
         for (int j = 0; j < 2; j++)
         {
+            cout << "Fault " << j << " on wire " << fwire << ":\n";
             if (PODEM(fwire, j))
             {
                 cout << "Fault " << j << "on wire " << fwire << " can be detected by test vector: \n";
+                cout << "Fault " << j << "on wire " << fwire << " can be detected by test vector: ";
                 for (int k = 0; k < npi; k++)
                 {
                     cout << "Input: " << inputs[k] << " " << state[adj[inputs[k] - 1][0].second] << "\n";

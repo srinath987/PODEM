@@ -17,22 +17,36 @@ bool PODEM(int wire, int fault)
     int owire = nv[1];
     int ovalue = nv[2];
     cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
-    if(onode == -1 || owire == -1 || ovalue == -1)
+    if (onode == -1 || owire == -1 || ovalue == -1)
     {
         return false;
     }
+    
+    if(fault == 0)
+    {
+        state[owire] = 2;
+    }
+    else
+    {
+        state[owire] = 3;
+    }
+
     pair<pi, int> pv = backtrace(onode, ovalue);
     int pnd = pv.first.first;
     int pwr = pv.first.second;
     int pval = pv.second;
 
-    if(pnd == -1 || pwr == -1 || pval == -1)
+    if (pnd == -1 || pwr == -1 || pval == -1)
     {
         return false;
     }
     cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
     stackstate.push(state);
     fimply(pnd, pval);
+    for (auto it : state)
+    {
+        cout << "Wire " << it.first << " is " << it.second << endl;
+    }
 
     if (PODEM(wire, fault))
     {
@@ -46,6 +60,10 @@ bool PODEM(int wire, int fault)
         pval = 0;
     state = stackstate.top();
     fimply(pnd, pval);
+    for (auto it : state)
+    {
+        cout << "Wire " << it.first << " is " << it.second << endl;
+    }
 
     if (PODEM(wire, fault))
     {
@@ -130,7 +148,7 @@ pair<pi, int> backtrace(int u, int &obj)
     {
         obj = 1 - obj;
     }
-    else if(ntype[u] == -1)
+    else if (ntype[u] == -1)
     {
         assign.first.first = u;
         assign.first.second = adj[u - 1][0].second;
@@ -149,7 +167,7 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
          << node << "\n";
     int v, w;
     for (auto it : revadj[node - 1])
-    {   
+    {
         v = it.first;
         w = it.second;
         if (visited[v - 1] != 1)
@@ -189,8 +207,12 @@ void dfs(vi &visited, int node, int &obj, pair<pi, int> &assign, bool &backtrace
 
 void fimply(int pinp, int val)
 {
-    for(auto it : adj[pinp - 1])
+    for (auto it : adj[pinp - 1])
     {
+        if (state[it.second] == 2 || state[it.second] == 3)
+        {
+            continue;
+        }
         state[it.second] = val;
     }
     if (val == -1)
@@ -278,7 +300,7 @@ void fimply(int pinp, int val)
                     fimply(v, 0);
                 }
             }
-            else if(df == 1 && ef == 1)
+            else if (df == 1 && ef == 1)
             {
                 if (ntype[v] == 3)
                 {
@@ -289,7 +311,7 @@ void fimply(int pinp, int val)
                     fimply(v, 0);
                 }
             }
-            else if(df == 1 && ef == 0)
+            else if (df == 1 && ef == 0)
             {
                 if (ntype[v] == 3)
                 {
@@ -300,7 +322,7 @@ void fimply(int pinp, int val)
                     fimply(v, 2);
                 }
             }
-            else if(df == 0 && ef == 1)
+            else if (df == 0 && ef == 1)
             {
                 if (ntype[v] == 3)
                 {
@@ -312,7 +334,7 @@ void fimply(int pinp, int val)
                 }
             }
         }
-        else if(ntype[v] == 2 || ntype[v] == 4)
+        else if (ntype[v] == 2 || ntype[v] == 4)
         {
             if (logic == 1)
             {
@@ -325,7 +347,7 @@ void fimply(int pinp, int val)
                     fimply(v, 1);
                 }
             }
-            else if(df == 1 && ef == 1)
+            else if (df == 1 && ef == 1)
             {
                 if (ntype[v] == 4)
                 {
@@ -336,7 +358,7 @@ void fimply(int pinp, int val)
                     fimply(v, 1);
                 }
             }
-            else if(df == 1 && ef == 0)
+            else if (df == 1 && ef == 0)
             {
                 if (ntype[v] == 4)
                 {
@@ -347,7 +369,7 @@ void fimply(int pinp, int val)
                     fimply(v, 2);
                 }
             }
-            else if(df == 0 && ef == 1)
+            else if (df == 0 && ef == 1)
             {
                 if (ntype[v] == 4)
                 {
@@ -359,11 +381,11 @@ void fimply(int pinp, int val)
                 }
             }
         }
-        else if(ntype[v] == 5 || ntype[v] == 6)
+        else if (ntype[v] == 5 || ntype[v] == 6)
         {
-            if(logic == 1)
+            if (logic == 1)
             {
-                if(ntype[v] == 6)
+                if (ntype[v] == 6)
                 {
                     fimply(v, 1);
                 }
