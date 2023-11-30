@@ -48,30 +48,53 @@ int main()
     }
 
     int fwire;
+    bool possible;
     // PODEM for all faults possible
+    cout << "\n\n\n\n";
     for (auto it : state)
     {
         fwire = it.first;
         for (int j = 0; j < 2; j++)
         {
             cout << "Fault " << j << " on wire " << fwire << ":\n";
-            if (PODEM(fwire, j))
+            finit = false;
+            possible = PODEM(fwire, j);
+            if (possible)
             {
-                cout << "Fault " << j << "on wire " << fwire << " can be detected by test vector: \n";
-                cout << "Fault " << j << "on wire " << fwire << " can be detected by test vector: ";
+                cout << "It can be detected by test vector: \n";
                 for (int k = 0; k < npi; k++)
                 {
-                    cout << "Input: " << inputs[k] << " " << state[adj[inputs[k] - 1][0].second] << "\n";
+                    cout << "Input: " << inputs[k] << " Value: ";
+                    if (state[adj[inputs[k] - 1][0].second] == 2)
+                    {
+                        cout << "1"
+                             << "\n";
+                    }
+                    else if (state[adj[inputs[k] - 1][0].second] == 3)
+                    {
+                        cout << "0"
+                             << "\n";
+                    }
+                    else if (state[adj[inputs[k] - 1][0].second] == -1)
+                    {
+                        cout << "X"
+                             << "\n";
+                    }
+                    else
+                    {
+                        cout << state[adj[inputs[k] - 1][0].second] << "\n";
+                    }
                 }
             }
             else
             {
-                cout << "Fault " << j << "on wire " << fwire << " cannot be detected by any test vector\n";
+                cout << "It cannot be detected by any test vector\n";
             }
-            while(!stackstate.empty())
+            while (!stackstate.empty())
             {
                 stackstate.pop();
             }
+            cout << "\n\n\n\n";
         }
     }
 

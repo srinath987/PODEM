@@ -21,15 +21,18 @@ bool PODEM(int wire, int fault)
     {
         return false;
     }
-
-    if (fault == 0)
+    if(finit)
     {
-        state[owire] = 2;
+        if (fault == 0)
+        {
+            state[owire] = 2;
+        }
+        else
+        {
+            state[owire] = 3;
+        }
     }
-    else
-    {
-        state[owire] = 3;
-    }
+    
 
     pair<pi, int> pv = backtrace(onode, ovalue);
     int pnd = pv.first.first;
@@ -79,6 +82,7 @@ vector<int> Objective(int wire, int fault)
     // returns the objective (n, v) n -> node v -> value
     if (state[wire] == -1)
     {
+        finit = true;
         int currnode;
         for (int i = 0; i < adj.size(); i++)
         {
@@ -100,6 +104,7 @@ vector<int> Objective(int wire, int fault)
         }
     }
     // propagate the fault to the output
+    finit = false;
     for (auto it : state)
     {
         if (it.second == 2 || it.second == 3)
