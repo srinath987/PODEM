@@ -16,7 +16,7 @@ bool PODEM(int wire, int fault)
     int onode = nv[0];
     int owire = nv[1];
     int ovalue = nv[2];
-    // cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
+    cout << "Objective: " << onode << " " << owire << " " << ovalue << "\n";
     if (onode == -1 || owire == -1 || ovalue == -1)
     {
         return false;
@@ -31,36 +31,36 @@ bool PODEM(int wire, int fault)
     {
         return false;
     }
-    // cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
+    cout << "Backtraced: " << pnd << " " << pwr << " " << pval << " forward implying\n";
     stackstate.push(state);
     fimply(pnd, pval, wire, fault);
-    // for (auto it : state)
-    // {
-    //     cout << "Wire " << it.first << " is " << it.second << endl;
-    // }
+    for (auto it : state)
+    {
+        cout << "Wire " << it.first << " is " << it.second << endl;
+    }
 
     if (PODEM(wire, fault))
     {
         return true;
     }
 
-    // cout << "Backtracking, forward implying\n";
+    cout << "Backtracking, forward implying\n";
     if (pval == 0)
         pval = 1;
     else
         pval = 0;
     state = stackstate.top();
     fimply(pnd, pval, wire, fault);
-    // for (auto it : state)
-    // {
-    //     cout << "Wire " << it.first << " is " << it.second << endl;
-    // }
+    for (auto it : state)
+    {
+        cout << "Wire " << it.first << " is " << it.second << endl;
+    }
 
     if (PODEM(wire, fault))
     {
         return true;
     }
-    // cout << "Invalid input\n";
+    cout << "Invalid input\n";
     stackstate.pop();
     return false;
 }
@@ -204,7 +204,7 @@ void fimply(int pinp, int val, int fwire, int fval)
 {
     for (auto it : adj[pinp - 1])
     {
-        if (it.second == fwire  && finit == true)
+        if (it.second == fwire)
         {
             if(val == 1 - fval)
             {
@@ -220,6 +220,16 @@ void fimply(int pinp, int val, int fwire, int fval)
             }
             continue;
         }
+        // if (state[it.second] == 2)
+        // {
+        //     if (val == 1)
+        //     continue;
+        // }
+        // else if (state[it.second] == 3)
+        // {
+        //     if (val == 0)
+        //     continue;
+        // }
         state[it.second] = val;
     }
     if (val == -1)
