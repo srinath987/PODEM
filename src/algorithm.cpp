@@ -16,7 +16,7 @@ bool PODEM(int wire, int fault)
     int onode = nv[0];
     int owire = nv[1];
     int ovalue = nv[2];
-
+    
     pair<pi, int> pv = backtrace(onode, ovalue);
     int pnd = pv.first.first;
     int pwr = pv.first.second;
