@@ -4,8 +4,8 @@
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    freopen("input1.txt", "r", stdin);
+    freopen("output1.txt", "w", stdout);
     int npi;
     cout << "Enter the number of nodes (Branching points, gates, inputs, outputs): \n";
     cin >> numnodes;
@@ -47,10 +47,53 @@ int main()
         cout << "Node " << i + 1 << " is of type " << ntype[i + 1] << endl;
     }
 
-    int fwire;
+    int fwire, fval;
     bool possible;
     // PODEM for all faults possible
-    cout << "\n\n\n\n";
+    // cout << "\n";
+    // cout << "Enter the wire and fault to be detected: \n";
+    // cin >> fwire;
+    // cin >> fval;
+    // possible = PODEM(fwire, fval);
+    // if (possible)
+    // {
+    //     cout << "It can be detected by test vector: \n";
+    //     for (int k = 0; k < npi; k++)
+    //     {
+    //         cout << "Input: " << inputs[k] << " Value: ";
+    //         if (state[adj[inputs[k] - 1][0].second] == 2)
+    //         {
+    //             cout << "1"
+    //                  << "\n";
+    //         }
+    //         else if (state[adj[inputs[k] - 1][0].second] == 3)
+    //         {
+    //             cout << "0"
+    //                  << "\n";
+    //         }
+    //         else if (state[adj[inputs[k] - 1][0].second] == -1)
+    //         {
+    //             cout << "X"
+    //                  << "\n";
+    //         }
+    //         else
+    //         {
+    //             cout << state[adj[inputs[k] - 1][0].second] << "\n";
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     cout << "It cannot be detected by any test vector\n";
+    // }
+    // while (!stackstate.empty())
+    // {
+    //     stackstate.pop();
+    // }
+    // for (auto it1 : state)
+    // {
+    //     state[it1.first] = -1;
+    // }
     for (auto it : state)
     {
         fwire = it.first;
@@ -93,6 +136,10 @@ int main()
             while (!stackstate.empty())
             {
                 stackstate.pop();
+            }
+            for (auto it1 : state)
+            {
+                state[it1.first] = -1;
             }
             cout << "\n\n\n\n";
         }

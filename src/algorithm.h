@@ -9,6 +9,6 @@ pair<pi, int> backtrace(int u, int &obj);
 
 void dfs(vi &visited, int node, int &obj, pair<pi, int> &ass, bool &backtraced);
 
-void fimply(int pinp, int val);
+void fimply(int pinp, int val, int fwire, int fval);
 
 #endif
