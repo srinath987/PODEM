@@ -4,8 +4,8 @@
 
 int main()
 {
-    freopen("input1.txt", "r", stdin);
-    freopen("output1.txt", "w", stdout);
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
     int npi;
     cout << "Enter the number of nodes (Branching points, gates, inputs, outputs): \n";
     cin >> numnodes;
