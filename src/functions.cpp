@@ -1,12 +1,12 @@
 # include "mainheader.cpp"
 # include "functions.h"
 
-void addEdge(vector<vector<pair<int, int>>> &adj, int u, int v, int wire)
+void addEdge(vvp &adj, int u, int v, int wire)
 {
     adj[u - 1].push_back(make_pair(v, wire));
 }
 
-void printcircuit(vector<vector<pair<int, int>>> &adj, int numnodes)
+void printcircuit(vvp &adj, int numnodes)
 {
     for(int i = 0; i < numnodes; i++)
     {
