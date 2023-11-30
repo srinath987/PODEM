@@ -130,6 +130,14 @@ pair<pi, int> backtrace(int u, int &obj)
     {
         obj = 1 - obj;
     }
+    else if(ntype[u] == -1)
+    {
+        assign.first.first = u;
+        assign.first.second = adj[u - 1][0].second;
+        assign.second = obj;
+        backtraced = true;
+        return assign;
+    }
     dfs(visited, u, obj, assign, backtraced);
     return assign;
 }
