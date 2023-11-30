@@ -48,57 +48,67 @@ int main()
         cout << "Node " << i + 1 << " is of type " << ntype[i + 1] << endl;
     }
 
-    int fwire, fval;
+    int fwire, fval, nfaults;
     bool possible;
-
+    // PODEM for given faults
+    cout << "\n\n\n\nEnter the number of faults you wish to observe:\n";
+    cin >> nfaults;
+    vp faults;
     cout << "Enter the wire and fault to be detected: \n";
-    cin >> fwire;
-    cin >> fval;
-    cout << "Fault " << fval << " on wire " << fwire << ":\n";
-    finit = false;
-    
-    possible = PODEM(fwire, fval);
-    if (possible)
+    for(int i = 0; i < nfaults; i++)
     {
-        cout << "It can be detected by test vector: \n";
-        for (int k = 0; k < npi; k++)
+        cin >> fwire >> fval;
+        faults.push_back(make_pair(fwire, fval));
+    }
+    for(int i = 0; i < nfaults; i++)
+    {
+        cout << "\nFault " << faults[i].second << " on wire " << faults[i].first << ":\n";
+        finit = false;
+
+        possible = PODEM(faults[i].first, faults[i].second);
+        if (possible)
         {
-            cout << "Input: " << inputs[k] << " Value: ";
-            if (state[adj[inputs[k] - 1][0].second] == 2)
+            cout << "It can be detected by test vector: \n";
+            for (int k = 0; k < npi; k++)
             {
-                cout << "1"
-                     << "\n";
-            }
-            else if (state[adj[inputs[k] - 1][0].second] == 3)
-            {
-                cout << "0"
-                     << "\n";
-            }
-            else if (state[adj[inputs[k] - 1][0].second] == -1)
-            {
-                cout << "X"
-                     << "\n";
-            }
-            else
-            {
-                cout << state[adj[inputs[k] - 1][0].second] << "\n";
+                cout << "Input: " << inputs[k] << " Value: ";
+                if (state[adj[inputs[k] - 1][0].second] == 2)
+                {
+                    cout << "1"
+                         << "\n";
+                }
+                else if (state[adj[inputs[k] - 1][0].second] == 3)
+                {
+                    cout << "0"
+                         << "\n";
+                }
+                else if (state[adj[inputs[k] - 1][0].second] == -1)
+                {
+                    cout << "X"
+                         << "\n";
+                }
+                else
+                {
+                    cout << state[adj[inputs[k] - 1][0].second] << "\n";
+                }
             }
         }
-    }
-    else
-    {
-        cout << "It cannot be detected by any test vector\n";
-    }
+        else
+        {
+            cout << "It cannot be detected by any test vector\n";
+        }
 
-    while (!stackstate.empty())
-    {
-        stackstate.pop();
-    }
-    for (auto it1 : state)
-    {
-        state[it1.first] = -1;
-    }
+        while (!stackstate.empty())
+        {
+            stackstate.pop();
+        }
+        for (auto it1 : state)
+        {
+            state[it1.first] = -1;
+        }
 
+    }
+    
 
 
     // PODEM for all faults possible

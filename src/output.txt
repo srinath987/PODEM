@@ -44,6 +44,23 @@ Node 13 is of type 0
 Node 14 is of type 0
 Node 15 is of type -2
 Node 16 is of type -2
+Wire is 1 -1
+Wire is 2 -1
+Wire is 3 -1
+Wire is 4 -1
+Wire is 5 -1
+Wire is 6 -1
+Wire is 7 -1
+Wire is 8 -1
+Wire is 9 -1
+Wire is 10 -1
+Wire is 11 -1
+Wire is 12 -1
+Wire is 13 -1
+Wire is 14 -1
+Wire is 15 -1
+Wire is 16 -1
+Wire is 17 -1
 Fault 0 on wire 1:
 It can be detected by test vector: 
 Input: 1 Value: 1
@@ -112,7 +129,7 @@ Input: 5 Value: X
 
 Fault 0 on wire 4:
 It can be detected by test vector: 
-Input: 1 Value: 0
+Input: 1 Value: X
 Input: 2 Value: 1
 Input: 3 Value: 1
 Input: 4 Value: 1
@@ -123,7 +140,7 @@ Input: 5 Value: 1
 
 Fault 1 on wire 4:
 It can be detected by test vector: 
-Input: 1 Value: 0
+Input: 1 Value: X
 Input: 2 Value: 1
 Input: 3 Value: 1
 Input: 4 Value: 0
@@ -178,7 +195,7 @@ Input: 5 Value: X
 
 Fault 0 on wire 7:
 It can be detected by test vector: 
-Input: 1 Value: 0
+Input: 1 Value: X
 Input: 2 Value: 1
 Input: 3 Value: X
 Input: 4 Value: 0
@@ -189,7 +206,7 @@ Input: 5 Value: 1
 
 Fault 1 on wire 7:
 It can be detected by test vector: 
-Input: 1 Value: 0
+Input: 1 Value: X
 Input: 2 Value: 1
 Input: 3 Value: 1
 Input: 4 Value: 1
@@ -310,7 +327,7 @@ Input: 5 Value: X
 
 Fault 0 on wire 13:
 It can be detected by test vector: 
-Input: 1 Value: 0
+Input: 1 Value: X
 Input: 2 Value: 1
 Input: 3 Value: 1
 Input: 4 Value: 1
